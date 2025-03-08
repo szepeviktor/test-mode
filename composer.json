@@ -1,0 +1,18 @@
+{
+    "name": "szepeviktor/test-mode",
+    "description": "Switch to Test/Sandbox Mode",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SzepeViktor\\TestMode\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Viktor Szépe",
+            "email": "viktor@szepe.net"
+        }
+    ],
+    "require": {}
+}
