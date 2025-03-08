@@ -12,11 +12,21 @@ const MODULE_NAMESPACE = 'SzepeViktor\\TestMode\\Modules\\';
 
 function getLoader(): ClassLoader
 {
-    return require __DIR__ . '/vendor/autoload.php';
+    static $loader;
+
+    if (!$loader instanceof ClassLoader) {
+        $loader = require __DIR__ . '/vendor/autoload.php';
+    }
+
+    return $loader;
 }
 
+/**
+ * @return list<class-string>
+ */
 function getModules(): array
 {
+    /** @var list<class-string> $classes */
     $classes = array_keys(getLoader()->getClassMap());
 
     if ($classes === []) {
