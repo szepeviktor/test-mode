@@ -14,5 +14,8 @@
             "email": "viktor@szepe.net"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "~7.4.0 || ~8.0.0",
+        "composer-runtime-api": "^2.2"
+    }
 }
