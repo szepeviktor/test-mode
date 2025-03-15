@@ -1,4 +1,4 @@
-<?php          
+<?php
 
 declare(strict_types=1);
 
@@ -17,6 +17,7 @@ use function esc_html__;
 use function esc_textarea;
 use function get_option;
 use function register_setting;
+use function sanitize_title;
 use function settings_fields;
 use function submit_button;
 
@@ -53,9 +54,13 @@ class AdminPage
             self::PAGE_SLUG
         );
 
-        foreach (['module1', 'module2'] as $moduleName) {
-            $optionName = 'test-mode-'.$moduleName;
-            $fieldId = 'test-mode-'.$moduleName.'-checkbox';
+        foreach (ModuleLoader::getInstances() as $instance) {
+            $moduleName = $instance->getName();
+            $moduleSlug = sanitize_title($moduleName);
+            $label = $instance->getLabel();
+
+            $optionName = 'test-mode-'.$moduleSlug;
+            $fieldId = 'test-mode-'.$moduleSlug.'-checkbox';
 
             register_setting(
                 self::OPTION_GROUP,
@@ -74,6 +79,7 @@ class AdminPage
                 [
                     'option_name' => $optionName,
                     'html_id' => $fieldId,
+                    'html_label_text' => $label,
                 ]
             );
         }
@@ -102,7 +108,7 @@ class AdminPage
     {
         printf(
             '<p>%s</p>',
-            esc_html__('Enabling test mode for modules.', 'szv-test-mode')
+            esc_html__('Activate Test Mode modules.', 'szv-test-mode')
         );
     }
 
@@ -114,7 +120,7 @@ class AdminPage
             $args['option_name'],
             $args['html_id'],
             checked(get_option($args['option_name']), '1', false),
-            esc_html(__('Enable', 'szv-test-mode'))
+            esc_html($args['html_label_text'])
         );
     }
 }

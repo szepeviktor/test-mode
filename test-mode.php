@@ -26,10 +26,6 @@ declare(strict_types=1);
 namespace SzepeViktor\TestMode;
 
 use Composer\Autoload\ClassLoader;
-use RuntimeException;
-use SzepeViktor\TestMode\Modules\Module;
-
-const MODULE_NAMESPACE = 'SzepeViktor\\TestMode\\Modules\\';
 
 function getLoader(): ClassLoader
 {
@@ -42,37 +38,6 @@ function getLoader(): ClassLoader
     return $loader;
 }
 
-/**
- * @return list<class-string>
- */
-function getModules(): array
-{
-    /** @var list<class-string> $classes */
-    $classes = array_keys(getLoader()->getClassMap());
-
-    if ($classes === []) {
-        throw new RuntimeException('Run composer dump-autoload --optimize');
-    }
-
-    return array_filter(
-        $classes,
-        static function (string $fqcn): bool {
-            return str_starts_with($fqcn, MODULE_NAMESPACE);
-        }
-    );
-}
-
-function bootModules(): void
-{
-    foreach (getModules() as $module) {
-        if (!in_array(Module::class, class_implements($module, true), true)) {
-            continue;
-        }
-
-        new $module;
-    }
-}
-
 // Prevent direct execution.
 if (! defined('ABSPATH')) {
     exit;
@@ -80,4 +45,5 @@ if (! defined('ABSPATH')) {
 
 getLoader();
 
-add_action('plugins_loaded', [Plugin::class, 'boot'], 10, 0);
+// Boot after priority 10
+add_action('plugins_loaded', [Plugin::class, 'boot'], 11, 0);

@@ -84,11 +84,11 @@ class Plugin
 
     /**
      * Start!
-     *
-     * @return void
      */
-    public static function boot()
+    public static function boot(): void
     {
+        ModuleLoader::getInstances();
+
         if (is_admin()) {
             (new AdminPage())->boot();
         }
