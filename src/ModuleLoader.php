@@ -59,7 +59,6 @@ class ModuleLoader
         if (!is_array($container)) {
             foreach (self::getAll() as $module) {
                 $container[$module] = new $module();
-                $container[$module]->activate();
             }
         }
 

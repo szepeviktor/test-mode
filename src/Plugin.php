@@ -87,7 +87,9 @@ class Plugin
      */
     public static function boot(): void
     {
-        ModuleLoader::getInstances();
+        foreach (ModuleLoader::getInstances() as $instance) {
+            $instance->activate();
+        }
 
         if (is_admin()) {
             (new AdminPage())->boot();
