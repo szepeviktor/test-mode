@@ -12,7 +12,6 @@ use function apply_filters;
 class ModuleLoader
 {
     const MODULE_NAMESPACE = 'SzepeViktor\\TestMode\\Modules\\';
-    // @TODO
     const MODE_NOCHANGE = 'no-change';
     const MODE_TESTMODE = 'testmode';
     const MODE_DISABLED = 'disabled';

@@ -56,31 +56,27 @@ class AdminPage
         );
 
         foreach (ModuleLoader::getInstances() as $instance) {
-            $moduleName = $instance->getName();
-            $moduleSlug = sanitize_title($moduleName);
-            $label = $instance->getLabel();
-
-            $optionName = 'test-mode-'.$moduleSlug;
-            $fieldId = 'test-mode-'.$moduleSlug.'-checkbox';
+            $moduleSlug = $instance->getSlug();
+            $fieldId = self::OPTION_PREFIX.$moduleSlug.'-button';
+            $optionName = self::OPTION_PREFIX.$moduleSlug;
 
             register_setting(
                 self::OPTION_GROUP,
                 $optionName,
                 [
-                    'default' => 'testmode',
+                    'default' => ModuleLoader::MODE_TESTMODE,
                     'sanitize_callback' => 'sanitize_key',
                 ]
             );
             add_settings_field(
                 $fieldId,
-                $moduleName, // title
+                $instance->getName(), // title
                 [$this, 'renderCheckboxField'],
                 self::PAGE_SLUG,
                 self::SECTION_ID,
                 [
                     'option_name' => $optionName,
-                    'html_id' => $fieldId,
-                    'html_label_text' => $label,
+                    'html_label_text' => $instance->getLabel(),
                 ]
             );
         }
@@ -109,16 +105,16 @@ class AdminPage
     {
         printf(
             '<p>%s</p>',
-            esc_html__('Select mode for each Test Mode module.', 'szv-test-mode')
+            esc_html__('Select mode for each module.', 'szv-test-mode')
         );
     }
 
     public function renderCheckboxField($args): void
     {
         $modes = [
-            'no-change' => '&#x2796;',
-            'testmode' => '&#x1F6A7;',
-            'disabled' => '&#x1F6AB;',
+            ModuleLoader::MODE_NOCHANGE => '&#x2796;',
+            ModuleLoader::MODE_TESTMODE => '&#x1F6A7;',
+            ModuleLoader::MODE_DISABLED => '&#x1F6AB;',
         ];
 
         echo '<fieldset>';
@@ -133,15 +129,5 @@ class AdminPage
             );
         }
         echo '</fieldset>'.esc_html($args['html_label_text']);
-/*
-        printf(
-            '<label for="%s"><input type="checkbox" name="%s" id="%s" value="1" %s>&nbsp;%s</label>',
-            $args['html_id'],
-            $args['option_name'],
-            $args['html_id'],
-            checked(get_option($args['option_name']), '1', false),
-            esc_html($args['html_label_text'])
-        );
-*/
     }
 }
