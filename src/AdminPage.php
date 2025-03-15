@@ -71,7 +71,7 @@ class AdminPage
             add_settings_field(
                 $fieldId,
                 $instance->getName(), // title
-                [$this, 'renderCheckboxField'],
+                [$this, 'renderInputFields'],
                 self::PAGE_SLUG,
                 self::SECTION_ID,
                 [
@@ -109,16 +109,10 @@ class AdminPage
         );
     }
 
-    public function renderCheckboxField($args): void
+    public function renderInputFields($args): void
     {
-        $modes = [
-            ModuleLoader::MODE_NOCHANGE => '&#x2796;',
-            ModuleLoader::MODE_TESTMODE => '&#x1F6A7;',
-            ModuleLoader::MODE_DISABLED => '&#x1F6AB;',
-        ];
-
         echo '<fieldset>';
-        foreach ($modes as $mode => $emoji) {
+        foreach ($this->getModes() as $mode => $emoji) {
             printf(
                 '<label title="%s" style="font-size: 2rem;"><input type="radio" name="%s" value="%s" style="margin-left: 24px;" %s>%s</label>',
                 $mode,
@@ -129,5 +123,14 @@ class AdminPage
             );
         }
         echo '</fieldset>'.esc_html($args['html_label_text']);
+    }
+
+    protected function getModes()
+    {
+        return [
+            ModuleLoader::MODE_NOCHANGE => '&#x2796;',
+            ModuleLoader::MODE_TESTMODE => '&#x1F6A7;',
+            ModuleLoader::MODE_DISABLED => '&#x1F6AB;',
+        ];
     }
 }

@@ -22,7 +22,7 @@ add_filter(
             1
         );
     },
-    11, // Be later than 10!
+    10, // Before 11!
     0
 );
 ```
