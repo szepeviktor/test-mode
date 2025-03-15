@@ -23,6 +23,7 @@ use function submit_button;
 
 class AdminPage
 {
+    const OPTION_PREFIX = 'test-mode-';
     const MENU_SLUG = 'test_mode';
     const PAGE_SLUG = 'test-mode-page';
     const SECTION_ID = 'test-mode-section';
@@ -66,13 +67,13 @@ class AdminPage
                 self::OPTION_GROUP,
                 $optionName,
                 [
-                    'default' => '0',
-                    'sanitize_callback' => 'absint',
+                    'default' => 'testmode',
+                    'sanitize_callback' => 'sanitize_key',
                 ]
             );
             add_settings_field(
                 $fieldId,
-                Strings::mb_ucfirst($moduleName), // title
+                $moduleName, // title
                 [$this, 'renderCheckboxField'],
                 self::PAGE_SLUG,
                 self::SECTION_ID,
@@ -108,12 +109,31 @@ class AdminPage
     {
         printf(
             '<p>%s</p>',
-            esc_html__('Activate Test Mode modules.', 'szv-test-mode')
+            esc_html__('Select mode for each Test Mode module.', 'szv-test-mode')
         );
     }
 
     public function renderCheckboxField($args): void
     {
+        $modes = [
+            'no-change' => '&#x2796;',
+            'testmode' => '&#x1F6A7;',
+            'disabled' => '&#x1F6AB;',
+        ];
+
+        echo '<fieldset>';
+        foreach ($modes as $mode => $emoji) {
+            printf(
+                '<label title="%s" style="font-size: 2rem;"><input type="radio" name="%s" value="%s" style="margin-left: 24px;" %s>%s</label>',
+                $mode,
+                $args['option_name'],
+                $mode,
+                checked(get_option($args['option_name']), $mode, false),
+                $emoji
+            );
+        }
+        echo '</fieldset>'.esc_html($args['html_label_text']);
+/*
         printf(
             '<label for="%s"><input type="checkbox" name="%s" id="%s" value="1" %s>&nbsp;%s</label>',
             $args['html_id'],
@@ -122,5 +142,6 @@ class AdminPage
             checked(get_option($args['option_name']), '1', false),
             esc_html($args['html_label_text'])
         );
+*/
     }
 }

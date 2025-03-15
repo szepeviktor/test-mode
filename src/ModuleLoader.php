@@ -12,6 +12,10 @@ use function apply_filters;
 class ModuleLoader
 {
     const MODULE_NAMESPACE = 'SzepeViktor\\TestMode\\Modules\\';
+    // @TODO
+    const MODE_NOCHANGE = 'no-change';
+    const MODE_TESTMODE = 'testmode';
+    const MODE_DISABLED = 'disabled';
 
     /**
      * @return list<class-string>
@@ -56,6 +60,7 @@ class ModuleLoader
         if (!is_array($container)) {
             foreach (self::getAll() as $module) {
                 $container[$module] = new $module();
+                $container[$module]->activate();
             }
         }
 
