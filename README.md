@@ -2,6 +2,12 @@
 
 Core, plugins and theme go into Test Mode.
 
+There are three possible modes for each module.
+
+1. no change ✅
+2. test mode 🚧
+3. disabled 🚫
+
 ## Add your own module
 
 Implement
