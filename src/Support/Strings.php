@@ -7,7 +7,7 @@ namespace SzepeViktor\TestMode\Support;
 class Strings
 {
     /**
-     * Polyfill for PHP 8 mb_strtoupper()
+     * Polyfill for PHP 8 mb_ucfirst()
      */
     public static function mb_ucfirst(string $string): string
     {

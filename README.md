@@ -1,6 +1,6 @@
 # Test Mode
 
-Core, plugins and theme goes into Test Mode.
+Core, plugins and theme go into Test Mode.
 
 ## Add your own module
 
