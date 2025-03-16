@@ -32,3 +32,7 @@ add_filter(
     0
 );
 ```
+
+## Debug WordPress
+
+See https://github.com/szepeviktor/debug-wordpress

@@ -1,0 +1,9 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+    paths:
+        - test-mode.php
+        - src/
+    level: 5
+    ignoreErrors:
+        #- '#^Unsafe usage of new static#'
