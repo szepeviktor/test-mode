@@ -13,6 +13,7 @@ use function add_settings_field;
 use function add_settings_section;
 use function checked;
 use function do_settings_sections;
+use function esc_attr;
 use function esc_html__;
 use function esc_textarea;
 use function get_option;
@@ -32,7 +33,7 @@ class AdminPage
     public function boot(): void
     {
         add_action('admin_menu', [$this, 'addSettingsPage']);
-        add_action('admin_init', [$this, 'settings_init']);
+        add_action('admin_init', [$this, 'addFields']);
     }
 
     public function addSettingsPage(): void
@@ -46,7 +47,7 @@ class AdminPage
         );
     }
 
-    public function settings_init(): void
+    public function addFields(): void
     {
         add_settings_section(
             self::SECTION_ID,
@@ -115,9 +116,9 @@ class AdminPage
         foreach ($this->getModes() as $mode => $emoji) {
             printf(
                 '<label title="%s" style="font-size: 2rem;"><input type="radio" name="%s" value="%s" style="margin-left: 24px;" %s>%s</label>',
-                $mode,
-                $args['option_name'],
-                $mode,
+                esc_attr($mode),
+                esc_attr($args['option_name']),
+                esc_attr($mode),
                 checked(get_option($args['option_name']), $mode, false),
                 $emoji
             );

@@ -92,6 +92,7 @@ class Plugin
         }
 
         if (is_admin()) {
+            (new DashboardWidget())->boot();
             (new AdminPage())->boot();
         }
     }
