@@ -18,6 +18,7 @@ use function esc_html__;
 use function esc_textarea;
 use function get_option;
 use function register_setting;
+use function remove_action;
 use function sanitize_title;
 use function settings_fields;
 use function submit_button;
@@ -38,13 +39,15 @@ class AdminPage
 
     public function addSettingsPage(): void
     {
-        $hook_suffix = add_options_page(
+        $hookSuffix = add_options_page(
             __('Test Mode', 'szv-test-mode'), // page_title
             __('Test Mode', 'szv-test-mode'), // menu_title
             'manage_options', // capability
             self::MENU_SLUG,
             [$this, 'renderSettingsPage']
         );
+
+        add_action('load-'.$hookSuffix, [$this, 'removeEmojis'], 10, 0);
     }
 
     public function addFields(): void
@@ -81,6 +84,12 @@ class AdminPage
                 ]
             );
         }
+    }
+
+    public function removeEmojis(): void
+    {
+        remove_action('admin_print_scripts', 'print_emoji_detection_script');
+        remove_action('admin_print_styles', 'print_emoji_styles');
     }
 
     public function renderSettingsPage(): void
