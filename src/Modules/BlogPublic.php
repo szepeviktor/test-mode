@@ -15,12 +15,12 @@ class BlogPublic extends BaseModule implements Module
 
     public function getLabel(): string
     {
-        return 'Disallow search engine robots in disabled.';
+        return 'Disallow search engine robots.';
     }
 
     public function testmode(): void
     {
-        // no op
+        $this->disabled();
     }
 
     public function disabled(): void

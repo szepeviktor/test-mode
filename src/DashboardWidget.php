@@ -19,7 +19,7 @@ class DashboardWidget
     {
         wp_add_dashboard_widget(
             'testmode_widget',
-            'Status', // widget_name
+            'Environment', // widget_name
             [$this, 'renderDashboardWidget'],
             null,
             null,

@@ -57,6 +57,7 @@ class ModuleLoader
         static $container;
 
         if (!is_array($container)) {
+            $container = [];
             foreach (self::getAll() as $module) {
                 $container[$module] = new $module();
             }
