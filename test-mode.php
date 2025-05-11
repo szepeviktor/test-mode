@@ -47,3 +47,4 @@ getLoader();
 
 // Boot after priority 10
 add_action('plugins_loaded', [Plugin::class, 'boot'], 11, 0);
+register_uninstall_hook(__FILE__, [Plugin::class, 'uninstall']);

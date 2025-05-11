@@ -58,7 +58,9 @@ class Plugin
      */
     public static function uninstall()
     {
-        // Remove custom database tables, WordPress options etc.
+        foreach (ModuleLoader::getInstances() as $instance) {
+            delete_option(AdminPage::OPTION_PREFIX.$instance->getSlug());
+        }
     }
 
     /**
