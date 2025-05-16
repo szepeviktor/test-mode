@@ -28,8 +28,8 @@ class Mail extends BaseModule implements Module
 
                 return $args;
             },
-            10,
-            PHP_INT_MAX
+            PHP_INT_MAX,
+            1
         );
     }
 
