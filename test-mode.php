@@ -19,6 +19,7 @@
  * Text Domain:       szv-test-mode
  * License:           GPL v2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Update URI:        false
  */
 
 declare(strict_types=1);

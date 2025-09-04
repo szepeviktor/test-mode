@@ -68,7 +68,7 @@ class AdminPage
                 self::OPTION_GROUP,
                 $optionName,
                 [
-                    'default' => ModuleLoader::MODE_TESTMODE,
+                    'default' => ModuleLoader::MODE_NOCHANGE,
                     'sanitize_callback' => 'sanitize_key',
                 ]
             );
