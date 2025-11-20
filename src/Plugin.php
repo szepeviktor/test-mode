@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace SzepeViktor\TestMode;
 
+use SzepeViktor\TestMode\ThirdPartyModules\Modules as ThirdParties;
+
+use function add_filter;
 use function current_user_can;
 use function esc_html__;
 use function esc_url;
@@ -34,7 +37,7 @@ class Plugin
     {
         /** @var string */
         $pluginBasename = Config::get('baseName');
-        load_plugin_textdomain('plugin-slug', false, sprintf('%s/%s', dirname($pluginBasename), 'languages'));
+        load_plugin_textdomain('szv-test-mode', false, sprintf('%s/%s', dirname($pluginBasename), 'languages'));
     }
 
     /**
@@ -77,10 +80,26 @@ class Plugin
 
         printf(
             '<div class="notice notice-error"><p>%1$s <a href="%2$s" target="_blank">%3$s</a> %4$s</p></div>',
-            esc_html__('Plugin Name activation failed! Please read', 'plugin-slug'),
+            esc_html__('Plugin Name activation failed! Please read', 'szv-test-mode'),
             esc_url('https://github.com/szepeviktor/starter-plugin#installation'),
-            esc_html__('the Installation instructions', 'plugin-slug'),
-            esc_html__('for list of requirements.', 'plugin-slug')
+            esc_html__('the Installation instructions', 'szv-test-mode'),
+            esc_html__('for list of requirements.', 'szv-test-mode')
+        );
+    }
+
+    public static function loadThirdParties(): void
+    {
+        add_filter(
+            'szepeviktor/test-mode/modules',
+            static function (array $modules) {
+                if (class_exists(\MakeCommerce::class)) {
+                    $modules[] = ThirdParties\MakeCommerce::class;
+                }
+
+                return $modules;
+            },
+            10,
+            1
         );
     }
 
@@ -89,6 +108,8 @@ class Plugin
      */
     public static function boot(): void
     {
+        self::loadThirdParties();
+
         foreach (ModuleLoader::getInstances() as $instance) {
             $instance->activate();
         }
