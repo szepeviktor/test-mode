@@ -12,9 +12,6 @@ declare(strict_types=1);
 
 namespace SzepeViktor\TestMode;
 
-use SzepeViktor\TestMode\ThirdPartyModules as ThirdParties;
-
-use function add_filter;
 use function current_user_can;
 use function esc_html__;
 use function esc_url;
@@ -87,29 +84,11 @@ class Plugin
         );
     }
 
-    public static function loadThirdParties(): void
-    {
-        add_filter(
-            'szepeviktor/test-mode/modules',
-            static function (array $modules) {
-                if (class_exists(\MakeCommerce::class)) {
-                    $modules[] = ThirdParties\MakeCommerce::class;
-                }
-
-                return $modules;
-            },
-            10,
-            1
-        );
-    }
-
     /**
      * Start!
      */
     public static function boot(): void
     {
-        self::loadThirdParties();
-
         foreach (ModuleLoader::getInstances() as $instance) {
             $instance->activate();
         }
