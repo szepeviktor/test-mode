@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace SzepeViktor\TestMode;
 
-use SzepeViktor\TestMode\ThirdPartyModules\Modules as ThirdParties;
+use SzepeViktor\TestMode\ThirdPartyModules as ThirdParties;
 
 use function add_filter;
 use function current_user_can;
