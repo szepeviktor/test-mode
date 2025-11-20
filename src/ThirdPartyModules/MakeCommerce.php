@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SzepeViktor\TestMode\ThirdPartyModules\Modules;
+namespace SzepeViktor\TestMode\ThirdPartyModules;
 
 use SzepeViktor\TestMode\Modules\BaseModule;
 use SzepeViktor\TestMode\Modules\Module;
