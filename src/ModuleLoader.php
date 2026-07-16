@@ -27,7 +27,7 @@ class ModuleLoader
         $classes = array_keys(getLoader()->getClassMap());
 
         if ($classes === []) {
-            throw new RuntimeException('Run composer dump-autoload --optimize');
+            throw new RuntimeException('Run composer dump-autoload --no-dev --optimize');
         }
 
         return array_filter(
