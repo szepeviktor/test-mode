@@ -17,6 +17,7 @@ use function esc_html__;
 use function esc_url;
 use function is_admin;
 use function load_plugin_textdomain;
+use function wp_doing_ajax;
 
 /**
  * Plugin functions.
@@ -93,7 +94,7 @@ class Plugin
             $instance->activate();
         }
 
-        if (is_admin()) {
+        if (is_admin() && ! wp_doing_ajax()) {
             (new DashboardWidget())->boot();
             (new AdminPage())->boot();
         }
