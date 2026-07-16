@@ -36,6 +36,23 @@ class MakeCommerce extends BaseModule implements Module
 
     public function disabled(): void
     {
+        // Disable the Blocks payment integration.
+        add_filter(
+            'option_woocommerce_makecommerce_settings',
+            static function ($settings): array {
+                if (! is_array($settings)) {
+                    $settings = [];
+                }
+
+                $settings['active'] = 'no';
+
+                return $settings;
+            },
+            PHP_INT_MAX,
+            1
+        );
+
+        // Remove the classic checkout payment gateway.
         add_filter(
             'woocommerce_available_payment_gateways',
             static function (array $gateways): array {
@@ -47,6 +64,7 @@ class MakeCommerce extends BaseModule implements Module
             1
         );
 
+        // Hide MakeCommerce shipping methods from WooCommerce rates.
         add_filter(
             'woocommerce_package_rates',
             static function (array $rates): array {
