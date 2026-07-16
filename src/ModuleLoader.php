@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace SzepeViktor\TestMode;
 
+use MakeCommerce;
 use RuntimeException;
 use SzepeViktor\TestMode\Modules\Module;
-use SzepeViktor\TestMode\ThirdPartyModules as ThirdParties;
+use SzepeViktor\TestMode\ThirdPartyModules;
 
 use function apply_filters;
 
@@ -45,8 +46,8 @@ class ModuleLoader
     {
         $modules = [];
 
-        if (class_exists(\MakeCommerce::class)) {
-            $modules[] = ThirdParties\MakeCommerce::class;
+        if (class_exists(MakeCommerce::class)) {
+            $modules[] = ThirdPartyModules\MakeCommerce::class;
         }
 
         return $modules;
