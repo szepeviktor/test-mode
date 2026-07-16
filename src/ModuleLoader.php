@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace SzepeViktor\TestMode;
 
+use MakeCommerce;
 use RuntimeException;
 use SzepeViktor\TestMode\Modules\Module;
+use SzepeViktor\TestMode\ThirdPartyModules;
 
 use function apply_filters;
 
@@ -40,9 +42,26 @@ class ModuleLoader
     /**
      * @return list<class-string>
      */
+    public static function getThirdParties(): array
+    {
+        $modules = [];
+
+        if (class_exists(MakeCommerce::class)) {
+            $modules[] = ThirdPartyModules\MakeCommerce::class;
+        }
+
+        return $modules;
+    }
+
+    /**
+     * @return list<class-string>
+     */
     public static function getAll(): array
     {
-        $modules = apply_filters('szepeviktor/test-mode/modules', self::getBuiltins());
+        $modules = apply_filters(
+            'szepeviktor/test-mode/modules',
+            array_merge(self::getBuiltins(), self::getThirdParties())
+        );
 
         return array_filter(
             $modules,

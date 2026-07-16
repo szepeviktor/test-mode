@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Plugin.php - Procedural part of Plugin Name.
+ * Plugin.php - Procedural part of Test Mode.
  *
- * @author Your Name <username@example.com>
+ * @author Viktor Szépe <viktor@szepe.net>
  * @license GPL-2.0-or-later http://www.gnu.org/licenses/gpl-2.0.txt
  * @link https://example.com/plugin-name
  */
@@ -34,7 +34,7 @@ class Plugin
     {
         /** @var string */
         $pluginBasename = Config::get('baseName');
-        load_plugin_textdomain('plugin-slug', false, sprintf('%s/%s', dirname($pluginBasename), 'languages'));
+        load_plugin_textdomain('szv-test-mode', false, sprintf('%s/%s', dirname($pluginBasename), 'languages'));
     }
 
     /**
@@ -69,7 +69,7 @@ class Plugin
     public static function printRequirementsNotice()
     {
         // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
-        error_log('Plugin Name requirements are not met. Please read the Installation instructions.');
+        error_log('Test Mode requirements are not met. Please read the Installation instructions.');
 
         if (! current_user_can('activate_plugins')) {
             return;
@@ -77,10 +77,10 @@ class Plugin
 
         printf(
             '<div class="notice notice-error"><p>%1$s <a href="%2$s" target="_blank">%3$s</a> %4$s</p></div>',
-            esc_html__('Plugin Name activation failed! Please read', 'plugin-slug'),
-            esc_url('https://github.com/szepeviktor/starter-plugin#installation'),
-            esc_html__('the Installation instructions', 'plugin-slug'),
-            esc_html__('for list of requirements.', 'plugin-slug')
+            esc_html__('Test Mode activation failed! Please read', 'szv-test-mode'),
+            esc_url('https://github.com/szepeviktor/test-mode#installation'),
+            esc_html__('the Installation instructions', 'szv-test-mode'),
+            esc_html__('for list of requirements.', 'szv-test-mode')
         );
     }
 
