@@ -14,7 +14,13 @@ There are three possible modes for each module.
 - `Disallow robots`: sets `blog_public` to `0` in both test mode and disabled mode.
 - `Cron events`: stops cron requests in both test mode and disabled mode.
 - `Mail`: redirects all outgoing mail to the site admin in test mode, or disables mail sending entirely.
+- `Outbound HTTP requests`: allows only same-site and explicitly approved requests in test mode, or disables all HTTP requests entirely.
 - `MakeCommerce payment gateway`: uses the sandbox in test mode, or disables its payment and shipping methods entirely.
+
+The `Outbound HTTP requests` module is a focused alternative to the
+[`airplane-mode`](https://github.com/norcross/airplane-mode) plugin and does not
+disable external assets, avatars, or embeds. Update checks and downloads must be
+explicitly approved like other outbound requests.
 
 ## Add your own module
 
