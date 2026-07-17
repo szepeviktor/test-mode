@@ -19,10 +19,12 @@ There are three possible modes for each module.
 - `Outbound HTTP requests`: allows only same-site and explicitly approved requests in test mode, or disables all HTTP requests entirely.
 - `MakeCommerce payment gateway`: uses the sandbox in test mode, or disables its payment and shipping methods entirely.
 
-The `Outbound HTTP requests` module is a focused alternative to the
-[`airplane-mode`](https://github.com/norcross/airplane-mode) plugin and does not
-disable external assets, avatars, or embeds. Update checks and downloads must be
-explicitly approved like other outbound requests.
+## Recommended plugins
+
+- [`Display Environment Type`](https://wordpress.org/plugins/display-environment-type/): shows the current
+  WordPress environment type in the admin bar and the dashboard.
+- [`Airplane Mode`](https://github.com/norcross/airplane-mode): disables external assets, avatars, or embeds.
+- [Debug WordPress how-to](https://github.com/szepeviktor/debug-wordpress)
 
 ## Add your own module
 
@@ -48,7 +50,3 @@ add_filter(
     0
 );
 ```
-
-## Debug WordPress
-
-See https://github.com/szepeviktor/debug-wordpress
