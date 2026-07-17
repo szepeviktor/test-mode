@@ -14,7 +14,8 @@ There are three possible modes for each module.
 - `Disallow robots`: sets `blog_public` to `0` in both test mode and disabled mode.
 - `Cron events`: stops cron requests in both test mode and disabled mode.
 - `Action Scheduler`: stops queue and asynchronous request processing in both test mode and disabled mode.
-- `Mail`: redirects all outgoing mail to the site admin in test mode, or disables mail sending entirely.
+- `Mail`: redirects all outgoing mail to the site admin in test mode. Disabled mode uses FluentSMTP
+  simulation when available, or blocks mail at the WordPress level otherwise.
 - `Outbound HTTP requests`: allows only same-site and explicitly approved requests in test mode, or disables all HTTP requests entirely.
 - `MakeCommerce payment gateway`: uses the sandbox in test mode, or disables its payment and shipping methods entirely.
 

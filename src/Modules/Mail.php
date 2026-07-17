@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace SzepeViktor\TestMode\Modules;
 
 use function add_filter;
+use function constant;
+use function defined;
 use function get_bloginfo;
 
 class Mail extends BaseModule implements Module
@@ -35,6 +37,18 @@ class Mail extends BaseModule implements Module
 
     public function disabled(): void
     {
+        if (defined('FLUENTMAIL_PLUGIN_VERSION')) {
+            if (! defined('FLUENTMAIL_SIMULATE_EMAILS')) {
+                define('FLUENTMAIL_SIMULATE_EMAILS', true);
+
+                return;
+            }
+
+            if (constant('FLUENTMAIL_SIMULATE_EMAILS') === true) {
+                return;
+            }
+        }
+
         add_filter(
             'pre_wp_mail',
             '__return_false',
