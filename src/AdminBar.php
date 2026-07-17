@@ -13,6 +13,7 @@ use function esc_html;
 use function get_option;
 use function is_admin_bar_showing;
 use function plugins_url;
+use function sanitize_html_class;
 use function wp_enqueue_style;
 use function wp_get_environment_type;
 
@@ -61,7 +62,13 @@ class AdminBar
         $adminBar->add_node([
             'id' => 'test-mode',
             'parent' => 'top-secondary',
-            'title' => esc_html($environmentNames[$environment] ?? $environment),
+            'title' => sprintf(
+                '<span class="ab-icon" aria-hidden="true"></span><span class="ab-label">%s</span>',
+                esc_html($environmentNames[$environment] ?? $environment)
+            ),
+            'meta' => [
+                'class' => 'test-mode-environment-'.sanitize_html_class($environment),
+            ],
         ]);
 
         foreach (ModuleLoader::getInstances() as $module) {

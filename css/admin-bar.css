@@ -15,6 +15,34 @@
     background-color: rgb(255 255 255 / 10%);
 }
 
+#wp-admin-bar-test-mode > .ab-item > .ab-icon::before {
+    content: "\f339";
+    top: 2px;
+    color: inherit;
+}
+
+#wp-admin-bar-test-mode.test-mode-environment-production > .ab-item > .ab-icon::before {
+    content: "\f319";
+    top: 3px;
+}
+
+#wp-admin-bar-test-mode.test-mode-environment-staging > .ab-item > .ab-icon::before {
+    content: "\f111";
+    top: 1px;
+}
+
+#wp-admin-bar-test-mode.test-mode-environment-development > .ab-item > .ab-icon::before {
+    content: "\f107";
+    top: 2px;
+}
+
+@media screen and (max-width: 782px) {
+    #wpadminbar #wp-admin-bar-test-mode {
+        display: block;
+        position: static;
+    }
+}
+
 #wpadminbar #wp-admin-bar-test-mode-environment > .ab-item > .ab-icon::before {
     top: 2px;
     color: inherit;
