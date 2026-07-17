@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+
+name: "Release"
+
+on:  # yamllint disable-line rule:truthy
+    release:
+        types:
+        - "published"
+    workflow_dispatch: null
+
+permissions:
+    contents: "write"
+
+concurrency:
+    group: "${{ github.workflow }}-${{ github.ref }}"
+    cancel-in-progress: true
+
+env:
+    PLUGIN_SLUG: "test-mode"
+
+jobs:
+    plugin_zip:
+        name: "📦 Build WordPress plugin ZIP"
+        runs-on: "ubuntu-24.04"
+        timeout-minutes: 10
+        steps:
+        -
+            name: "Set up PHP"
+            uses: "shivammathur/setup-php@v2"
+            with:
+                php-version: "8.1"
+                coverage: "none"
+        -
+            name: "Checkout repository"
+            uses: "actions/checkout@v6"
+        -
+            name: "Validate Composer configuration"
+            run: "composer validate --no-interaction --strict"
+        -
+            name: "Read plugin version"
+            run: |
+                version="$(sed -n 's/^ \* Version: *//p' test-mode.php | head -n 1)"
+                test -n "${version}"
+                echo "PLUGIN_VERSION=${version}" >> "${GITHUB_ENV}"
+                echo "ZIP_FILE=${PLUGIN_SLUG}-${version}.zip" >> "${GITHUB_ENV}"
+        -
+            name: "Select target release"
+            env:
+                GH_TOKEN: "${{ github.token }}"
+            run: |
+                if test "${{ github.event_name }}" = "release"; then
+                    tag_name="${{ github.event.release.tag_name }}"
+                else
+                    tag_name="$(gh release list --exclude-drafts --exclude-pre-releases --limit 1 --json tagName --jq '.[0].tagName')"
+                fi
+                test -n "${tag_name}"
+                echo "RELEASE_TAG=${tag_name}" >> "${GITHUB_ENV}"
+        -
+            name: "Create plugin ZIP"
+            run: |
+                composer install \
+                    --no-dev \
+                    --no-interaction \
+                    --prefer-dist \
+                    --optimize-autoloader
+                zip --recurse-paths "${ZIP_FILE}" test-mode.php src/ vendor/
+        -
+            name: "Upload ZIP to release"
+            env:
+                GH_TOKEN: "${{ github.token }}"
+            run: |
+                gh release upload "${RELEASE_TAG}" "${ZIP_FILE}" --clobber
