@@ -15,6 +15,23 @@
     background-color: rgb(255 255 255 / 10%);
 }
 
+#wpadminbar #wp-admin-bar-test-mode.test-mode-environment-production {
+    background-color: #b92a2a;
+}
+
+#wpadminbar #wp-admin-bar-test-mode.test-mode-environment-staging {
+    background-color: #d79d00;
+    color: #000;
+}
+
+#wpadminbar #wp-admin-bar-test-mode.test-mode-environment-staging li {
+    color: #fff;
+}
+
+#wpadminbar #wp-admin-bar-test-mode.test-mode-environment-development {
+    background-color: #34863b;
+}
+
 #wp-admin-bar-test-mode > .ab-item > .ab-icon::before {
     content: "\f339";
     top: 2px;
