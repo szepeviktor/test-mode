@@ -11,7 +11,7 @@
  * Plugin Name:       Test Mode
  * Plugin URI:        https://github.com/szepeviktor/test-mode
  * Description:       I want to be 🤖 a plugin to switch everything to test/sandbox mode
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Viktor Szépe
