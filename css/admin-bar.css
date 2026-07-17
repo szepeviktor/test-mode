@@ -1,0 +1,44 @@
+#wpadminbar #wp-admin-bar-test-mode {
+    background-color: #0080a8;
+    color: #fff;
+}
+
+#wpadminbar #wp-admin-bar-test-mode .ab-item {
+    color: inherit;
+}
+
+#wpadminbar #wp-admin-bar-test-mode .ab-sub-wrapper {
+    right: 0;
+}
+
+#wpadminbar #wp-admin-bar-test-mode .ab-sub-wrapper .ab-item:hover {
+    background-color: rgb(255 255 255 / 10%);
+}
+
+#wpadminbar #wp-admin-bar-test-mode-environment > .ab-item > .ab-icon::before {
+    top: 2px;
+    color: inherit;
+    content: "\f339";
+}
+
+#wpadminbar #wp-admin-bar-test-mode-environment.test-mode-environment-production > .ab-item > .ab-icon::before {
+    top: 3px;
+    content: "\f319";
+}
+
+#wpadminbar #wp-admin-bar-test-mode-environment.test-mode-environment-staging > .ab-item > .ab-icon::before {
+    top: 1px;
+    content: "\f111";
+}
+
+#wpadminbar #wp-admin-bar-test-mode-environment.test-mode-environment-development > .ab-item > .ab-icon::before {
+    top: 2px;
+    content: "\f107";
+}
+
+@media screen and (max-width: 782px) {
+    #wpadminbar #wp-admin-bar-test-mode-environment {
+        position: static;
+        display: block;
+    }
+}

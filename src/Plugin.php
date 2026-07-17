@@ -94,6 +94,8 @@ class Plugin
             $instance->activate();
         }
 
+        (new AdminBar())->boot();
+
         if (is_admin() && ! wp_doing_ajax()) {
             (new DashboardWidget())->boot();
             (new AdminPage())->boot();
