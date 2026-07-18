@@ -1,6 +1,8 @@
 includes:
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
+    scanFiles:
+        - tests/phpstan/woocommerce.stub
     paths:
         - test-mode.php
         - src/

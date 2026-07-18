@@ -1,0 +1,8 @@
+<?php
+
+class WC_Shipping_Rate
+{
+    public function get_method_id(): string
+    {
+    }
+}
