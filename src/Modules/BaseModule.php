@@ -27,6 +27,7 @@ abstract class BaseModule
     public function getLabel(): string
     {
         return sprintf(
+            /* translators: %s: Module name. */
             __('Put %s in test mode or disable it.', 'szv-test-mode'),
             $this->getName()
         );

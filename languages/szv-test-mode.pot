@@ -1,0 +1,94 @@
+# Copyright (C) 2026 Viktor Szépe
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Test Mode 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/test-mode\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-18T08:48:24+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: szv-test-mode\n"
+
+#. Plugin Name of the plugin
+#: src/AdminPage.php:43
+#: src/AdminPage.php:44
+msgid "Test Mode"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/szepeviktor/test-mode"
+msgstr ""
+
+#. Description of the plugin
+msgid "I want to be 🤖 a plugin to switch everything to test/sandbox mode"
+msgstr ""
+
+#. Author of the plugin
+msgid "Viktor Szépe"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/szepeviktor"
+msgstr ""
+
+#: src/AdminBar.php:54
+msgid "Local"
+msgstr ""
+
+#: src/AdminBar.php:55
+msgid "Development"
+msgstr ""
+
+#: src/AdminBar.php:56
+msgid "Staging"
+msgstr ""
+
+#: src/AdminBar.php:57
+msgid "Production"
+msgstr ""
+
+#: src/AdminPage.php:57
+msgid "Module Toggles"
+msgstr ""
+
+#: src/AdminPage.php:99
+msgid "Test Mode Dashboard"
+msgstr ""
+
+#: src/AdminPage.php:118
+msgid "Select mode for each module."
+msgstr ""
+
+#: src/ModuleMode.php:22
+msgid "No change"
+msgstr ""
+
+#: src/ModuleMode.php:26
+msgid "Test mode"
+msgstr ""
+
+#: src/ModuleMode.php:30
+msgid "Disabled"
+msgstr ""
+
+#. translators: %s: Module name.
+#: src/Modules/BaseModule.php:31
+msgid "Put %s in test mode or disable it."
+msgstr ""
+
+#: src/Plugin.php:80
+msgid "Test Mode activation failed! Please read"
+msgstr ""
+
+#: src/Plugin.php:82
+msgid "the Installation instructions"
+msgstr ""
+
+#: src/Plugin.php:83
+msgid "for list of requirements."
+msgstr ""

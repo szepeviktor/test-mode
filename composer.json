@@ -20,5 +20,8 @@
     },
     "require-dev": {
         "szepeviktor/phpstan-wordpress": "^2.0"
+    },
+    "scripts": {
+        "make-pot": "wp i18n make-pot . languages/szv-test-mode.pot --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/szepeviktor/test-mode/issues\"}'"
     }
 }
