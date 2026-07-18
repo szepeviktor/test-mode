@@ -12,6 +12,7 @@ use function current_user_can;
 use function esc_html;
 use function get_option;
 use function is_admin_bar_showing;
+use function is_string;
 use function plugins_url;
 use function sanitize_html_class;
 use function wp_enqueue_style;
@@ -36,7 +37,7 @@ class AdminBar
             'test-mode-admin-bar',
             plugins_url('css/admin-bar.css', dirname(__DIR__).'/test-mode.php'),
             ['admin-bar'],
-            null
+            '1.0.0'
         );
     }
 
@@ -46,11 +47,6 @@ class AdminBar
             return;
         }
 
-        $modes = [
-            ModuleLoader::MODE_NOCHANGE => [__('No change', 'szv-test-mode'), '➖'],
-            ModuleLoader::MODE_TESTMODE => [__('Test mode', 'szv-test-mode'), '🚧'],
-            ModuleLoader::MODE_DISABLED => [__('Disabled', 'szv-test-mode'), '🚫'],
-        ];
         $environment = wp_get_environment_type();
         $environmentNames = [
             'local' => __('Local', 'szv-test-mode'),
@@ -74,16 +70,24 @@ class AdminBar
         foreach (ModuleLoader::getInstances() as $module) {
             $mode = get_option(
                 AdminPage::OPTION_PREFIX.$module->getSlug(),
-                ModuleLoader::MODE_NOCHANGE
+                ModuleMode::NO_CHANGE
             );
-            [$modeName, $emoji] = $modes[$mode] ?? $modes[ModuleLoader::MODE_NOCHANGE];
+            $modeData = ModuleMode::get(is_string($mode) ? $mode : ModuleMode::NO_CHANGE);
 
             $adminBar->add_node([
                 'id' => 'test-mode-'.$module->getSlug(),
                 'parent' => 'test-mode',
-                'title' => esc_html(sprintf('%s %s', $module->getName(), $emoji)),
+                'title' => sprintf(
+                    '%s %s',
+                    esc_html($module->getName()),
+                    $modeData['emoji']
+                ),
                 'meta' => [
-                    'title' => esc_html(sprintf('%s: %s', $module->getName(), $modeName)),
+                    'title' => esc_html(sprintf(
+                        '%s: %s',
+                        $module->getName(),
+                        $modeData['label']
+                    )),
                 ],
             ]);
         }

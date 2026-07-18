@@ -68,7 +68,7 @@ class AdminPage
                 self::OPTION_GROUP,
                 $optionName,
                 [
-                    'default' => ModuleLoader::MODE_NOCHANGE,
+                    'default' => ModuleMode::NO_CHANGE,
                     'sanitize_callback' => 'sanitize_key',
                 ]
             );
@@ -122,25 +122,16 @@ class AdminPage
     public function renderInputFields($args): void
     {
         echo '<fieldset>';
-        foreach ($this->getModes() as $mode => $emoji) {
+        foreach (ModuleMode::all() as $mode => $modeData) {
             printf(
                 '<label title="%s" style="font-size: 2rem;"><input type="radio" name="%s" value="%s" style="margin-left: 24px;" %s>%s</label>',
-                esc_attr($mode),
+                esc_attr($modeData['label']),
                 esc_attr($args['option_name']),
                 esc_attr($mode),
                 checked(get_option($args['option_name']), $mode, false),
-                $emoji
+                $modeData['emoji']
             );
         }
         echo '</fieldset>'.esc_html($args['html_label_text']);
-    }
-
-    protected function getModes()
-    {
-        return [
-            ModuleLoader::MODE_NOCHANGE => '&#x2796;',
-            ModuleLoader::MODE_TESTMODE => '&#x1F6A7;',
-            ModuleLoader::MODE_DISABLED => '&#x1F6AB;',
-        ];
     }
 }

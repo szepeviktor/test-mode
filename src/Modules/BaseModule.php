@@ -6,6 +6,7 @@ namespace SzepeViktor\TestMode\Modules;
 
 use SzepeViktor\TestMode\AdminPage;
 use SzepeViktor\TestMode\ModuleLoader;
+use SzepeViktor\TestMode\ModuleMode;
 
 use function __;
 use function get_option;
@@ -36,10 +37,10 @@ abstract class BaseModule
         $mode = get_option(AdminPage::OPTION_PREFIX.$this->getSlug());
 
         switch ($mode) {
-            case ModuleLoader::MODE_TESTMODE:
+            case ModuleMode::TEST_MODE:
                 $this->testmode();
                 break;
-            case ModuleLoader::MODE_DISABLED:
+            case ModuleMode::DISABLED:
                 $this->disabled();
                 break;
         }

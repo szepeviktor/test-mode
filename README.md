@@ -8,6 +8,8 @@ There are three possible modes for each module.
 2. test mode 🚧
 3. disabled 🚫
 
+The admin bar shows the current WordPress environment and each module's mode with a status emoji.
+
 ## Available modules
 
 - `WP Environment`: sets `WP_ENVIRONMENT_TYPE` to `staging` in test mode, or `local` when disabled.
@@ -21,8 +23,6 @@ There are three possible modes for each module.
 
 ## Recommended plugins
 
-- [`Display Environment Type`](https://wordpress.org/plugins/display-environment-type/): shows the current
-  WordPress environment type in the admin bar and the dashboard.
 - [`Airplane Mode`](https://github.com/norcross/airplane-mode): disables external assets, avatars, or embeds.
 - [Debug WordPress how-to](https://github.com/szepeviktor/debug-wordpress)
 
