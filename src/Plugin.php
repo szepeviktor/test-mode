@@ -33,7 +33,6 @@ class Plugin
      */
     public static function loadTextDomain()
     {
-        /** @var string */
         $pluginBasename = Config::get('baseName');
         load_plugin_textdomain('szv-test-mode', false, sprintf('%s/%s', dirname($pluginBasename), 'languages'));
     }

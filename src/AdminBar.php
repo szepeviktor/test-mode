@@ -33,9 +33,11 @@ class AdminBar
             return;
         }
 
+        $filePath = Config::get('filePath');
+
         wp_enqueue_style(
             'test-mode-admin-bar',
-            plugins_url('css/admin-bar.css', dirname(__DIR__).'/test-mode.php'),
+            plugins_url('css/admin-bar.css', $filePath),
             ['admin-bar'],
             '1.0.0'
         );

@@ -28,6 +28,8 @@ namespace SzepeViktor\TestMode;
 
 use Composer\Autoload\ClassLoader;
 
+use function plugin_basename;
+
 function getLoader(): ClassLoader
 {
     static $loader;
@@ -45,6 +47,12 @@ if (! defined('ABSPATH')) {
 }
 
 getLoader();
+
+Config::init([
+    'filePath' => __FILE__,
+    'baseName' => plugin_basename(__FILE__),
+    'slug' => 'test-mode',
+]);
 
 // Boot after priority 10
 add_action('plugins_loaded', [Plugin::class, 'boot'], 11, 0);
